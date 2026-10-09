@@ -17,7 +17,7 @@ export const Route = createFileRoute("/_authenticated/tasks/$id")({
   },
   component: TaskDetail,
   notFoundComponent: () => <p className="text-muted-foreground">This task no longer exists.</p>,
-  errorComponent: ({ error }) => <p className="text-destructive">{error.message}</p>,
+  errorComponent: ({ error }) => <p className="text-destructive">{(error as Error).message}</p>,
 });
 
 function TaskDetail() {
@@ -42,7 +42,7 @@ function TaskDetail() {
   });
   const submit = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase.rpc("submit_task", { _submission_id: subId!, _content: content || undefined, _link: link || undefined });
+      const { error } = await supabase.rpc("submit_task", { _submission_id: subId!, ...(content ? { _content: content } : {}), ...(link ? { _link: link } : {}) });
       if (error) throw error;
     },
     onSuccess: () => {
