@@ -12,7 +12,7 @@ async function uid() {
 
 const must = <T,>(r: { data: T; error: { message: string } | null }) => {
   if (r.error) throw new Error(r.error.message);
-  return r.data;
+  return r.data as NonNullable<T>;
 };
 
 export const meQuery = queryOptions({
