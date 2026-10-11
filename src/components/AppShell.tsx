@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const nav = [
   { to: "/dashboard", label: "Home", icon: Home },
   { to: "/tasks", label: "Earn", icon: ListChecks },
-  { to: "/explore/freelance", label: "Work", icon: Briefcase },
+  { to: "/explore/$slug", params: { slug: "freelance" }, label: "Work", icon: Briefcase },
   { to: "/wallet", label: "Wallet", icon: Wallet },
   { to: "/profile", label: "Profile", icon: User },
 ] as const;
@@ -101,7 +101,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-card md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
         <div className="grid grid-cols-5">
           {nav.map((n) => (
-            <Link key={n.to} to={n.to} className="flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium text-muted-foreground" activeProps={{ className: "!text-primary" }}>
+            <Link key={n.label} to={n.to} params={"params" in n ? n.params : undefined} className="flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium text-muted-foreground" activeProps={{ className: "!text-primary" }}>
               <n.icon className="h-5 w-5" />
               {n.label}
             </Link>
