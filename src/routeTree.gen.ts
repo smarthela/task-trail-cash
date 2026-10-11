@@ -19,6 +19,7 @@ import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authen
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedReferralsRouteImport } from './routes/_authenticated/referrals'
 import { Route as AuthenticatedWalletRouteImport } from './routes/_authenticated/wallet'
+import { Route as AuthenticatedExploreSlugRouteImport } from './routes/_authenticated/explore.$slug'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks.index'
 import { Route as AuthenticatedTasksIdRouteImport } from './routes/_authenticated/tasks.$id'
 
@@ -72,6 +73,12 @@ const AuthenticatedWalletRoute = AuthenticatedWalletRouteImport.update({
   path: '/wallet',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedExploreSlugRoute =
+  AuthenticatedExploreSlugRouteImport.update({
+    id: '/explore/$slug',
+    path: '/explore/$slug',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/referrals': typeof AuthenticatedReferralsRoute
   '/wallet': typeof AuthenticatedWalletRoute
+  '/explore/$slug': typeof AuthenticatedExploreSlugRoute
   '/tasks/$id': typeof AuthenticatedTasksIdRoute
   '/tasks/': typeof AuthenticatedTasksIndexRoute
 }
@@ -106,6 +114,7 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/referrals': typeof AuthenticatedReferralsRoute
   '/wallet': typeof AuthenticatedWalletRoute
+  '/explore/$slug': typeof AuthenticatedExploreSlugRoute
   '/tasks/$id': typeof AuthenticatedTasksIdRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
 }
@@ -121,6 +130,7 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/referrals': typeof AuthenticatedReferralsRoute
   '/_authenticated/wallet': typeof AuthenticatedWalletRoute
+  '/_authenticated/explore/$slug': typeof AuthenticatedExploreSlugRoute
   '/_authenticated/tasks/$id': typeof AuthenticatedTasksIdRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
 }
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/referrals'
     | '/wallet'
+    | '/explore/$slug'
     | '/tasks/$id'
     | '/tasks/'
   fileRoutesByTo: FileRoutesByTo
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/referrals'
     | '/wallet'
+    | '/explore/$slug'
     | '/tasks/$id'
     | '/tasks'
   id:
@@ -163,6 +175,7 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/_authenticated/referrals'
     | '/_authenticated/wallet'
+    | '/_authenticated/explore/$slug'
     | '/_authenticated/tasks/$id'
     | '/_authenticated/tasks/'
   fileRoutesById: FileRoutesById
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedWalletRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/explore/$slug': {
+      id: '/_authenticated/explore/$slug'
+      path: '/explore/$slug'
+      fullPath: '/explore/$slug'
+      preLoaderRoute: typeof AuthenticatedExploreSlugRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/tasks/': {
       id: '/_authenticated/tasks/'
       path: '/tasks'
@@ -270,6 +290,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedReferralsRoute: typeof AuthenticatedReferralsRoute
   AuthenticatedWalletRoute: typeof AuthenticatedWalletRoute
+  AuthenticatedExploreSlugRoute: typeof AuthenticatedExploreSlugRoute
   AuthenticatedTasksIdRoute: typeof AuthenticatedTasksIdRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
 }
@@ -282,6 +303,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedReferralsRoute: AuthenticatedReferralsRoute,
   AuthenticatedWalletRoute: AuthenticatedWalletRoute,
+  AuthenticatedExploreSlugRoute: AuthenticatedExploreSlugRoute,
   AuthenticatedTasksIdRoute: AuthenticatedTasksIdRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
 }
