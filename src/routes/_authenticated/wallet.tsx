@@ -42,7 +42,7 @@ function WalletPage() {
           </div>
         ))}
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); withdraw.mutate(); }} className="space-y-3 rounded-3xl border border-border bg-card p-5">
+      <form id="withdraw" onSubmit={(e) => { e.preventDefault(); withdraw.mutate(); }} className="scroll-mt-20 space-y-3 rounded-3xl border border-border bg-card p-5">
         <h2 className="font-bold">Withdraw to M-Pesa</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           <div><Label htmlFor="a">Amount (KES)</Label><Input id="a" type="number" min={1} value={amount} onChange={(e) => setAmount(e.target.value)} required /></div>
