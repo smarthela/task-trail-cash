@@ -37,7 +37,7 @@ export function AdminEarningLinks() {
     mutationFn: async () => {
       const { data: u } = await supabase.auth.getUser();
       const { error } = await supabase.from("earning_links").insert({
-        ...f, reward: Number(f.reward || 0), status: "draft", created_by: u.user?.id,
+        ...f, reward: Number(f.reward || 0), status: "draft", created_by: u.user?.id ?? null,
       });
       if (error) throw error;
       setF(empty);
