@@ -363,6 +363,165 @@ export type Database = {
         }
         Relationships: []
       }
+      earning_link_clicks: {
+        Row: {
+          created_at: string
+          id: string
+          link_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          link_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          link_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "earning_link_clicks_link_id_fkey"
+            columns: ["link_id"]
+            isOneToOne: false
+            referencedRelation: "earning_links"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "earning_link_clicks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      earning_link_submissions: {
+        Row: {
+          created_at: string
+          id: string
+          link_id: string
+          proof_text: string | null
+          proof_url: string | null
+          review_note: string | null
+          reviewed_at: string | null
+          reviewer_id: string | null
+          reward: number
+          status: string
+          transaction_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          link_id: string
+          proof_text?: string | null
+          proof_url?: string | null
+          review_note?: string | null
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          reward: number
+          status?: string
+          transaction_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          link_id?: string
+          proof_text?: string | null
+          proof_url?: string | null
+          review_note?: string | null
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          reward?: number
+          status?: string
+          transaction_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "earning_link_submissions_link_id_fkey"
+            columns: ["link_id"]
+            isOneToOne: false
+            referencedRelation: "earning_links"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "earning_link_submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      earning_links: {
+        Row: {
+          completions_count: number
+          created_at: string
+          created_by: string | null
+          description: string
+          expires_at: string | null
+          id: string
+          instructions: string
+          kind: string
+          max_completions: number | null
+          reward: number
+          risk_note: string | null
+          section: string
+          status: string
+          title: string
+          updated_at: string
+          url: string
+          verification: string
+          verification_status: string
+        }
+        Insert: {
+          completions_count?: number
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          expires_at?: string | null
+          id?: string
+          instructions?: string
+          kind: string
+          max_completions?: number | null
+          reward?: number
+          risk_note?: string | null
+          section?: string
+          status?: string
+          title: string
+          updated_at?: string
+          url: string
+          verification?: string
+          verification_status?: string
+        }
+        Update: {
+          completions_count?: number
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          expires_at?: string | null
+          id?: string
+          instructions?: string
+          kind?: string
+          max_completions?: number | null
+          reward?: number
+          risk_note?: string | null
+          section?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          url?: string
+          verification?: string
+          verification_status?: string
+        }
+        Relationships: []
+      }
       fraud_flags: {
         Row: {
           created_at: string
@@ -1704,9 +1863,29 @@ export type Database = {
         Args: { _id: string; _provider_response?: Json }
         Returns: undefined
       }
+      my_referral_network: {
+        Args: { _max_depth?: number }
+        Returns: {
+          depth: number
+          members: number
+          qualified: number
+        }[]
+      }
+      record_link_click: { Args: { _link_id: string }; Returns: string }
+      referral_upline: {
+        Args: { _max_depth?: number; _user: string }
+        Returns: {
+          depth: number
+          user_id: string
+        }[]
+      }
       request_withdrawal: {
         Args: { _amount: number; _destination: string; _method: string }
         Returns: string
+      }
+      review_link_submission: {
+        Args: { _approve: boolean; _id: string; _note?: string }
+        Returns: undefined
       }
       review_submission: {
         Args: { _approve: boolean; _note?: string; _submission_id: string }
@@ -1718,6 +1897,10 @@ export type Database = {
       }
       setting_num: { Args: { _key: string }; Returns: number }
       start_task: { Args: { _task_id: string }; Returns: string }
+      submit_link_completion: {
+        Args: { _link_id: string; _proof_text?: string; _proof_url?: string }
+        Returns: string
+      }
       submit_task: {
         Args: {
           _answers?: Json

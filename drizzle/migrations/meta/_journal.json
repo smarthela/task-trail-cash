@@ -15,6 +15,13 @@
       "when": 1791547224364,
       "tag": "0001_seed_tasks_deals",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791789170101,
+      "tag": "0002_earning_links_crypto_referral_tree",
+      "breakpoints": true
     }
   ]
 }
