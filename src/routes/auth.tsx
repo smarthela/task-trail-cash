@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
@@ -26,6 +26,10 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [ref, setRef] = useState("");
+  useEffect(() => {
+    const r = new URLSearchParams(window.location.search).get("ref");
+    if (r) { setRef(r.toUpperCase()); setMode("up"); }
+  }, []);
   const [busy, setBusy] = useState(false);
   const navigate = useNavigate();
 

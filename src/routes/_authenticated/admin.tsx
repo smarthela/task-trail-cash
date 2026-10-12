@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { kes, meQuery } from "@/lib/data";
+import { AdminEarningLinks } from "@/components/AdminEarningLinks";
 
 const pendingSubs = queryOptions({
   queryKey: ["admin-subs"],
@@ -99,6 +100,7 @@ function AdminPage() {
           ))}
         </div>
       </section>
+      <AdminEarningLinks />
     </div>
   );
 }
