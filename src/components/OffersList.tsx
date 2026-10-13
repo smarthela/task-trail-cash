@@ -38,7 +38,10 @@ export function OffersList({ section, title, intro }: { section: "earn" | "crypt
   });
   const submit = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.rpc("submit_link_completion", { _link_id: id, _proof_text: proof.text || undefined, _proof_url: proof.url || undefined });
+      const args: { _link_id: string; _proof_text?: string; _proof_url?: string } = { _link_id: id };
+      if (proof.text) args._proof_text = proof.text;
+      if (proof.url) args._proof_url = proof.url;
+      const { error } = await supabase.rpc("submit_link_completion", args);
       if (error) throw error;
     },
     onSuccess: () => { toast.success("Proof sent. You'll be paid once it's verified."); setOpen(null); setProof({ text: "", url: "" }); qc.invalidateQueries({ queryKey: ["offers"] }); },
