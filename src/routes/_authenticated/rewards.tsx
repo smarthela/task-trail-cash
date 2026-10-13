@@ -22,7 +22,7 @@ const rewardsQuery = queryOptions({
     if (ch.error) throw ch.error;
     const progress = await Promise.all((ch.data ?? []).map((c) => supabase.rpc("challenge_progress", { _user: id, _metric: c.metric })));
     return {
-      challenges: (ch.data ?? []).map((c, i) => ({ ...c, progress: Number(progress[i].data ?? 0), claimed: (mine.data ?? []).some((m) => m.challenge_id === c.id) })),
+      challenges: (ch.data ?? []).map((c, i) => ({ ...c, progress: Number(progress[i]?.data ?? 0), claimed: (mine.data ?? []).some((m) => m.challenge_id === c.id) })),
       last: last.data?.[0],
       levels: (levels.data?.value ?? []) as { name: string; min_xp: number }[],
       badges: badges.data ?? [],

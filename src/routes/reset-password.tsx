@@ -29,7 +29,7 @@ function ResetPage() {
     supabase.auth.getSession().then(({ data: s }) => s.session && setReady(true));
     return () => data.subscription.unsubscribe();
   }, []);
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setBusy(true);
     const { error } = await supabase.auth.updateUser({ password: pw });
