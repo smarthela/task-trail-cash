@@ -11,7 +11,7 @@ import {
 export type NavItem = {
   label: string;
   icon: LucideIcon;
-  to?: "/dashboard" | "/wallet" | "/tasks" | "/deals" | "/referrals" | "/notifications" | "/profile" | "/admin";
+  to?: "/dashboard" | "/wallet" | "/tasks" | "/deals" | "/referrals" | "/notifications" | "/profile" | "/admin" | "/rewards" | "/crypto" | "/offers" | "/payment-methods";
   slug?: string;
   badge?: "notifications";
 };
