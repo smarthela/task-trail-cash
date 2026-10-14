@@ -76,6 +76,13 @@ function AuthPage() {
           )}
           <div><Label htmlFor="e">Email</Label><Input id="e" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></div>
           <div><Label htmlFor="p">Password</Label><Input id="p" type="password" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} required /></div>
+          {mode === "in" && (
+            <button type="button" className="text-sm font-medium text-secondary" onClick={async () => {
+              if (!email) { toast.error("Enter your email first."); return; }
+              const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` });
+              if (error) toast.error(error.message); else toast.success("Check your email for a reset link.");
+            }}>Forgot password?</button>
+          )}
           {mode === "up" && (
             <div><Label htmlFor="r">Referral code (optional)</Label><Input id="r" value={ref} onChange={(e) => setRef(e.target.value)} /></div>
           )}
