@@ -25,6 +25,8 @@ import { Route as AuthenticatedReferralsRouteImport } from './routes/_authentica
 import { Route as AuthenticatedRewardsRouteImport } from './routes/_authenticated/rewards'
 import { Route as AuthenticatedWalletRouteImport } from './routes/_authenticated/wallet'
 import { Route as AuthenticatedExploreSlugRouteImport } from './routes/_authenticated/explore.$slug'
+import { Route as AuthenticatedSurveysIndexRouteImport } from './routes/_authenticated/surveys.index'
+import { Route as AuthenticatedSurveysIdRouteImport } from './routes/_authenticated/surveys.$id'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks.index'
 import { Route as AuthenticatedTasksIdRouteImport } from './routes/_authenticated/tasks.$id'
 
@@ -110,6 +112,17 @@ const AuthenticatedExploreSlugRoute =
     path: '/explore/$slug',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSurveysIndexRoute =
+  AuthenticatedSurveysIndexRouteImport.update({
+    id: '/surveys/',
+    path: '/surveys/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSurveysIdRoute = AuthenticatedSurveysIdRouteImport.update({
+  id: '/surveys/$id',
+  path: '/surveys/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
@@ -137,7 +150,9 @@ export interface FileRoutesByFullPath {
   '/rewards': typeof AuthenticatedRewardsRoute
   '/wallet': typeof AuthenticatedWalletRoute
   '/explore/$slug': typeof AuthenticatedExploreSlugRoute
+  '/surveys/$id': typeof AuthenticatedSurveysIdRoute
   '/tasks/$id': typeof AuthenticatedTasksIdRoute
+  '/surveys/': typeof AuthenticatedSurveysIndexRoute
   '/tasks/': typeof AuthenticatedTasksIndexRoute
 }
 export interface FileRoutesByTo {
@@ -156,7 +171,9 @@ export interface FileRoutesByTo {
   '/rewards': typeof AuthenticatedRewardsRoute
   '/wallet': typeof AuthenticatedWalletRoute
   '/explore/$slug': typeof AuthenticatedExploreSlugRoute
+  '/surveys/$id': typeof AuthenticatedSurveysIdRoute
   '/tasks/$id': typeof AuthenticatedTasksIdRoute
+  '/surveys': typeof AuthenticatedSurveysIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
 }
 export interface FileRoutesById {
@@ -177,7 +194,9 @@ export interface FileRoutesById {
   '/_authenticated/rewards': typeof AuthenticatedRewardsRoute
   '/_authenticated/wallet': typeof AuthenticatedWalletRoute
   '/_authenticated/explore/$slug': typeof AuthenticatedExploreSlugRoute
+  '/_authenticated/surveys/$id': typeof AuthenticatedSurveysIdRoute
   '/_authenticated/tasks/$id': typeof AuthenticatedTasksIdRoute
+  '/_authenticated/surveys/': typeof AuthenticatedSurveysIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
 }
 export interface FileRouteTypes {
@@ -198,7 +217,9 @@ export interface FileRouteTypes {
     | '/rewards'
     | '/wallet'
     | '/explore/$slug'
+    | '/surveys/$id'
     | '/tasks/$id'
+    | '/surveys/'
     | '/tasks/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -217,7 +238,9 @@ export interface FileRouteTypes {
     | '/rewards'
     | '/wallet'
     | '/explore/$slug'
+    | '/surveys/$id'
     | '/tasks/$id'
+    | '/surveys'
     | '/tasks'
   id:
     | '__root__'
@@ -237,7 +260,9 @@ export interface FileRouteTypes {
     | '/_authenticated/rewards'
     | '/_authenticated/wallet'
     | '/_authenticated/explore/$slug'
+    | '/_authenticated/surveys/$id'
     | '/_authenticated/tasks/$id'
+    | '/_authenticated/surveys/'
     | '/_authenticated/tasks/'
   fileRoutesById: FileRoutesById
 }
@@ -362,6 +387,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedExploreSlugRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/surveys/': {
+      id: '/_authenticated/surveys/'
+      path: '/surveys'
+      fullPath: '/surveys/'
+      preLoaderRoute: typeof AuthenticatedSurveysIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/surveys/$id': {
+      id: '/_authenticated/surveys/$id'
+      path: '/surveys/$id'
+      fullPath: '/surveys/$id'
+      preLoaderRoute: typeof AuthenticatedSurveysIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/tasks/': {
       id: '/_authenticated/tasks/'
       path: '/tasks'
@@ -392,7 +431,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedRewardsRoute: typeof AuthenticatedRewardsRoute
   AuthenticatedWalletRoute: typeof AuthenticatedWalletRoute
   AuthenticatedExploreSlugRoute: typeof AuthenticatedExploreSlugRoute
+  AuthenticatedSurveysIdRoute: typeof AuthenticatedSurveysIdRoute
   AuthenticatedTasksIdRoute: typeof AuthenticatedTasksIdRoute
+  AuthenticatedSurveysIndexRoute: typeof AuthenticatedSurveysIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
 }
 
@@ -409,7 +450,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedRewardsRoute: AuthenticatedRewardsRoute,
   AuthenticatedWalletRoute: AuthenticatedWalletRoute,
   AuthenticatedExploreSlugRoute: AuthenticatedExploreSlugRoute,
+  AuthenticatedSurveysIdRoute: AuthenticatedSurveysIdRoute,
   AuthenticatedTasksIdRoute: AuthenticatedTasksIdRoute,
+  AuthenticatedSurveysIndexRoute: AuthenticatedSurveysIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
 }
 
