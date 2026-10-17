@@ -1802,6 +1802,7 @@ export type Database = {
         Args: { _amount: number; _note: string; _user: string }
         Returns: undefined
       }
+      admin_create_survey: { Args: { _survey: Json }; Returns: string }
       admin_fund_campaign: {
         Args: { _amount: number; _id: string; _reference: string }
         Returns: undefined
